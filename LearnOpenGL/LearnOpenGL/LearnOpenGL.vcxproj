@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Example1.h" />
+    <ClInclude Include="Example2.h" />
     <ClInclude Include="ExampleBase.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Mesh.h" />
