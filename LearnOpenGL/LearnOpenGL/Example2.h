@@ -2,7 +2,7 @@
 
 #include "ExampleBase.h"
 
-class Example1 : public ExampleBase {
+class Example2 : public ExampleBase {
 public:
 
 protected:

@@ -120,11 +120,13 @@
     <ClInclude Include="Example1.h" />
     <ClInclude Include="Example2.h" />
     <ClInclude Include="ExampleBase.h" />
+    <ClInclude Include="ExampleDeferred.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PostEffectHelper.h" />
     <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="ScreenQuadMesh.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Textures.h" />
   </ItemGroup>
@@ -139,6 +141,10 @@
     <ClCompile Include="RenderObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\deferred\DeferredGeometry.fs" />
+    <None Include="shaders\deferred\DeferredGeometry.vs" />
+    <None Include="shaders\deferred\DeferredLighting.fs" />
+    <None Include="shaders\deferred\DeferredLighting.vs" />
     <None Include="shaders\ParallaxMapping.fs" />
     <None Include="shaders\PostEffect.fs" />
     <None Include="shaders\PostEffect.vs" />

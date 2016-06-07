@@ -14,6 +14,7 @@
 
 #include "Camera.h"
 #include "Example1.h"
+#include "ExampleDeferred.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -30,8 +31,8 @@ GLfloat lastFrame = 0.0f;
 
 Camera *camera;
 
-int screenWidth = 800;
-int screenHeight = 600;
+int screenWidth = 640;
+int screenHeight = 640;
 
 int main()
 {
@@ -71,7 +72,7 @@ int main()
 	GLuint uboId = GetCommonUniformBuffer();
 	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboId);
 	
-	auto example = new Example1();
+	auto example = new ExampleDeferred();
 	example->Init(camera, uboId);
 
 	while (!glfwWindowShouldClose(window))

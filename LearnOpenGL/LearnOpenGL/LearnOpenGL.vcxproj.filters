@@ -19,6 +19,9 @@
     <Filter Include="源文件\shaders">
       <UniqueIdentifier>{3b52354e-dad5-4a2e-8961-741f9b31dcf7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\shaders\deferred">
+      <UniqueIdentifier>{4e458c1b-a8f5-437b-8fd0-420c2192aeb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -52,6 +55,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Example2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExampleDeferred.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenQuadMesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -99,6 +108,18 @@
     </None>
     <None Include="shaders\TangentVertex.vs">
       <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="shaders\deferred\DeferredGeometry.fs">
+      <Filter>源文件\shaders\deferred</Filter>
+    </None>
+    <None Include="shaders\deferred\DeferredGeometry.vs">
+      <Filter>源文件\shaders\deferred</Filter>
+    </None>
+    <None Include="shaders\deferred\DeferredLighting.fs">
+      <Filter>源文件\shaders\deferred</Filter>
+    </None>
+    <None Include="shaders\deferred\DeferredLighting.vs">
+      <Filter>源文件\shaders\deferred</Filter>
     </None>
   </ItemGroup>
 </Project>

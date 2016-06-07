@@ -1,11 +1,12 @@
 #include "Mesh.h"
 
+Mesh::Mesh()
+{
+}
+
 Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices)
 {
-	this->m_vertices = vertices;
-	this->m_indices = indices;
-
-	this->setup();
+	this->Init(vertices, indices);
 }
 
 Mesh::~Mesh()
@@ -17,6 +18,14 @@ void Mesh::Draw(Shader *shader)
 	glBindVertexArray(this->m_vaoId);
 	glDrawElements(GL_TRIANGLES, this->m_indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+}
+
+void Mesh::Init(vector<Vertex> vertices, vector<GLuint> indices)
+{
+	this->m_vertices = vertices;
+	this->m_indices = indices;
+
+	this->setup();
 }
 
 void Mesh::setup()

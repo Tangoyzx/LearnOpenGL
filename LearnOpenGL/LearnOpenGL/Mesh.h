@@ -19,9 +19,12 @@ struct Vertex
 class Mesh
 {
 public:
+	Mesh();
 	Mesh(vector<Vertex> vertices, vector<GLuint> indices);
 	~Mesh();
 	void Draw(Shader *shader);
+protected:
+	void Init(vector<Vertex> vertices, vector<GLuint> indices);
 private:
 	vector<Vertex> m_vertices;
 	vector<GLuint> m_indices;
