@@ -15,6 +15,7 @@
 #include "Camera.h"
 #include "Example1.h"
 #include "ExampleDeferred.h"
+#include "ExamplePBR.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -72,7 +73,7 @@ int main()
 	GLuint uboId = GetCommonUniformBuffer();
 	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboId);
 	
-	auto example = new ExampleDeferred();
+	auto example = new ExamplePBR();
 	example->Init(camera, uboId);
 
 	while (!glfwWindowShouldClose(window))

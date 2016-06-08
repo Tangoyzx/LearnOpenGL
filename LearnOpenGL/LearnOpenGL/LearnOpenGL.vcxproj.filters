@@ -22,6 +22,9 @@
     <Filter Include="源文件\shaders\deferred">
       <UniqueIdentifier>{4e458c1b-a8f5-437b-8fd0-420c2192aeb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\shaders\pbr">
+      <UniqueIdentifier>{0b4209cb-7823-4923-9c94-95f2676a4466}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -61,6 +64,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ScreenQuadMesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExamplePBR.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -120,6 +129,18 @@
     </None>
     <None Include="shaders\deferred\DeferredLighting.vs">
       <Filter>源文件\shaders\deferred</Filter>
+    </None>
+    <None Include="shaders\pbr\Skybox.fs">
+      <Filter>源文件\shaders\pbr</Filter>
+    </None>
+    <None Include="shaders\pbr\Skybox.vs">
+      <Filter>源文件\shaders\pbr</Filter>
+    </None>
+    <None Include="shaders\pbr\Klay.fs">
+      <Filter>源文件\shaders\pbr</Filter>
+    </None>
+    <None Include="shaders\pbr\BlackOP.fs">
+      <Filter>源文件\shaders\pbr</Filter>
     </None>
   </ItemGroup>
 </Project>
