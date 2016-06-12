@@ -18,21 +18,26 @@ public:
 
 		glDepthMask(GL_TRUE);
 
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, this->m_skybox->m_cubeTex);
+		
+
 		for (int i = 0; i < this->fragment_size; i++)
 		{
+			glUniform1i(glGetUniformLocation(this->m_shaders[i]->Program, "cube_texture"), 0);
 			this->m_shaders[i]->Use();
 			this->m_ros[i]->Render(this->m_shaders[i]);
 		}
 	}
 
 protected:
-	const int fragment_size = 2;
+	const int fragment_size = 3;
 	void ChildInit() override {
 		auto paths = vector<const char*>{ "res/skybox/right.jpg", "res/skybox/left.jpg" , "res/skybox/top.jpg", "res/skybox/bottom.jpg" , "res/skybox/back.jpg", "res/skybox/front.jpg" };
 
 		this->m_skybox = new Skybox(paths);
 
-		string fragments[] = { "shaders/pbr/Klay.fs", "shaders/pbr/BlackOP.fs" };
+		string fragments[] = { "shaders/pbr/IBL.fs" , "shaders/pbr/Klay.fs", "shaders/pbr/BlackOP.fs" };
 
 		auto model = new Model("res/sphere.obj");
 
@@ -47,7 +52,6 @@ protected:
 			this->m_shaders.push_back(shader);
 			ro->GetTransform()->SetTranslation(i * 3, 0, -4);
 		}
-
 
 		this->m_camera->GetTransform()->SetTranslation(0, 0, 4);
 	}

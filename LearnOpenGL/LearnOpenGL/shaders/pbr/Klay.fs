@@ -17,7 +17,7 @@ vec3 Fresnel(vec3 cspec, vec3 lightDir, vec3 half)
 
 void main() 
 {
-	float a = 16.0;
+	float a = 64.0;
 
 	vec3 cdiff = vec3(0.3, 0.58, .8);
 	vec3 cspec = vec3(1, 1, 1);

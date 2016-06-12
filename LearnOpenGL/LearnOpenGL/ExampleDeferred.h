@@ -18,11 +18,11 @@ protected:
 	Shader *m_gGeometryShader, *m_gLightingShader;
 
 	GLuint m_gBuffer, m_texPosition, m_texNormal, m_texAlbedoSpec, m_rboDepth, m_texDiffuse, m_texSpec;
-
-	RenderObject *m_renderObj, *m_renderObj_1, *m_renderObj_2, *m_renderObj_3, *m_renderObj_4;
-
+	
 	vector<glm::vec3> m_lightsColor;
 	vector<glm::vec4> m_lightsPos;
+
+	vector<RenderObject*> m_renderObjs;
 	
 	int SCREEN_WIDTH = 640;
 	int SCREEN_HEIGHT = 640;
@@ -42,11 +42,10 @@ protected:
 		glBindTexture(GL_TEXTURE_2D, this->m_texSpec);
 		glUniform1i(glGetUniformLocation(this->m_gGeometryShader->Program, "tex_spec"), 1);
 
-		this->m_renderObj->Render(this->m_gGeometryShader);
-		this->m_renderObj_1->Render(this->m_gGeometryShader);
-		this->m_renderObj_2->Render(this->m_gGeometryShader);
-		this->m_renderObj_3->Render(this->m_gGeometryShader);
-		this->m_renderObj_4->Render(this->m_gGeometryShader);
+		for (int i = 0; i < this->m_renderObjs.size(); i++)
+		{
+			this->m_renderObjs[i]->Render(this->m_gGeometryShader);
+		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
@@ -74,7 +73,7 @@ protected:
 		{
 			glUniform4fv(glGetUniformLocation(this->m_gLightingShader->Program, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &m_lightsPos[i][0]);
 			glUniform3fv(glGetUniformLocation(this->m_gLightingShader->Program, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &m_lightsColor[i][0]);
-			glUniform1f(glGetUniformLocation(this->m_gLightingShader->Program, ("lights[" + std::to_string(i) + "].isLinear").c_str()), 1.0f);
+			glUniform1f(glGetUniformLocation(this->m_gLightingShader->Program, ("lights[" + std::to_string(i) + "].isLinear").c_str()), 0.0f);
 		}
 
 		this->m_screenQuad->Draw(this->m_gLightingShader);
@@ -132,35 +131,26 @@ protected:
 
 		this->m_screenQuad = new ScreenQuadMesh();
 
-		auto model = new Model("res/cube.obj");
-		this->m_renderObj = new RenderObject(model);
-		this->m_renderObj_1 = new RenderObject(model);
-		this->m_renderObj_1->GetTransform()->SetTranslation(-3, 0, 0);
-		this->m_renderObj_2 = new RenderObject(model);
-		this->m_renderObj_2->GetTransform()->SetTranslation(3, 0, 0);
-		this->m_renderObj_3 = new RenderObject(model);
-		this->m_renderObj_3->GetTransform()->SetTranslation(0, 0, -3);
-		this->m_renderObj_4 = new RenderObject(model);
-		this->m_renderObj_4->GetTransform()->SetTranslation(0, 0, 3);
-		this->m_camera->GetTransform()->SetTranslation(0, 0, 4);
+		auto model = new Model("res/sphere.obj");
 
-		m_lightsPos.push_back(glm::vec4(2, 0, 2, 1));
-		m_lightsColor.push_back(glm::vec3(1, 0, 0));
 
-		m_lightsPos.push_back(glm::vec4(-2, 0, 2, 1));
-		m_lightsColor.push_back(glm::vec3(0, 1, 0));
+		for (int i = 0; i < 10; i++) 
+		{
+			for (int j = 0; j < 10; j++) 
+			{
+				auto ro = new RenderObject(model);
+				ro->GetTransform()->SetTranslation(i * 2, -3, j * 2);
+				this->m_renderObjs.push_back(ro);
+			}
+		}
 
-		m_lightsPos.push_back(glm::vec4(-2, 0, -2, 1));
-		m_lightsColor.push_back(glm::vec3(0, 0, 1));
+		for (int i = 0; i < 100; i++)
+		{
+			this->m_lightsPos.push_back(glm::vec4(rand()%20, rand() % 4 - 5, rand() % 20, 1));
+			this->m_lightsColor.push_back(glm::vec4(rand() % 100*0.01, rand() % 100 * 0.01, rand() % 100 * 0.01, 1));
+			//this->m_lightsColor.push_back(glm::vec4(1, 0, 0, 1));
+		}
 
-		m_lightsPos.push_back(glm::vec4(2, 0, -2, 1));
-		m_lightsColor.push_back(glm::vec3(0, 0, 1));
-
-		m_lightsPos.push_back(glm::vec4(0, 2, 0, 1));
-		m_lightsColor.push_back(glm::vec3(0, 1, 1));
-
-		m_lightsPos.push_back(glm::vec4(0, -2, 0, 1));
-		m_lightsColor.push_back(glm::vec3(1, 0, 1));
 
 		int width, height;
 		this->m_texDiffuse = Textures::LoadImage("res/box_diffuse.png", &width, &height, 0, SOIL_LOAD_RGB);

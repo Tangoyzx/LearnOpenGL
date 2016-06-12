@@ -79,7 +79,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>assimp.lib;FreeImage.lib;glew32s.lib;glfw3.lib;SOIL.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;FreeImage.lib;glew32s.lib;glfw3.lib;SOIL.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,6 +121,7 @@
     <ClInclude Include="Example2.h" />
     <ClInclude Include="ExampleBase.h" />
     <ClInclude Include="ExampleDeferred.h" />
+    <ClInclude Include="ExampleMipmap.h" />
     <ClInclude Include="ExamplePBR.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Mesh.h" />
@@ -147,8 +148,11 @@
     <None Include="shaders\deferred\DeferredGeometry.vs" />
     <None Include="shaders\deferred\DeferredLighting.fs" />
     <None Include="shaders\deferred\DeferredLighting.vs" />
+    <None Include="shaders\mipmap\Mipmap.fs" />
+    <None Include="shaders\mipmap\Mipmap_1.fs" />
     <None Include="shaders\ParallaxMapping.fs" />
     <None Include="shaders\pbr\BlackOP.fs" />
+    <None Include="shaders\pbr\IBL.fs" />
     <None Include="shaders\pbr\Klay.fs" />
     <None Include="shaders\pbr\Skybox.fs" />
     <None Include="shaders\pbr\Skybox.vs" />

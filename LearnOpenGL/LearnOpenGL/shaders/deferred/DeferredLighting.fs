@@ -12,7 +12,7 @@ struct Light {
 	float isLinear;
 };
 
-const int LIGHT_NUM = 6;
+const int LIGHT_NUM = 100;
 uniform Light lights[LIGHT_NUM];
 
 uniform sampler2D tex_position;

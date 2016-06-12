@@ -25,6 +25,9 @@
     <Filter Include="源文件\shaders\pbr">
       <UniqueIdentifier>{0b4209cb-7823-4923-9c94-95f2676a4466}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\shaders\mipmap">
+      <UniqueIdentifier>{4a795c62-30f9-45c1-805f-5b0e940d0f3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -70,6 +73,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ExamplePBR.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExampleMipmap.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -141,6 +147,15 @@
     </None>
     <None Include="shaders\pbr\BlackOP.fs">
       <Filter>源文件\shaders\pbr</Filter>
+    </None>
+    <None Include="shaders\pbr\IBL.fs">
+      <Filter>源文件\shaders\pbr</Filter>
+    </None>
+    <None Include="shaders\mipmap\Mipmap.fs">
+      <Filter>源文件\shaders\mipmap</Filter>
+    </None>
+    <None Include="shaders\mipmap\Mipmap_1.fs">
+      <Filter>源文件\shaders\mipmap</Filter>
     </None>
   </ItemGroup>
 </Project>
