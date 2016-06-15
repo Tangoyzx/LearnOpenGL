@@ -157,5 +157,8 @@
     <None Include="shaders\mipmap\Mipmap_1.fs">
       <Filter>源文件\shaders\mipmap</Filter>
     </None>
+    <None Include="shaders\pbr\UE4.fs">
+      <Filter>源文件\shaders\pbr</Filter>
+    </None>
   </ItemGroup>
 </Project>

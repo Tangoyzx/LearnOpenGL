@@ -75,7 +75,7 @@ int main()
 	GLuint uboId = GetCommonUniformBuffer();
 	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboId);
 	
-	auto example = new ExampleMipmap();
+	auto example = new ExamplePBR();
 	//auto example = new Example2();
 	example->Init(camera, uboId);
 

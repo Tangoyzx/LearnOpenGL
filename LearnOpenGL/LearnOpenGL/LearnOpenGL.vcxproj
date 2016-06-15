@@ -156,6 +156,7 @@
     <None Include="shaders\pbr\Klay.fs" />
     <None Include="shaders\pbr\Skybox.fs" />
     <None Include="shaders\pbr\Skybox.vs" />
+    <None Include="shaders\pbr\UE4.fs" />
     <None Include="shaders\PostEffect.fs" />
     <None Include="shaders\PostEffect.vs" />
     <None Include="shaders\Simple.fs" />

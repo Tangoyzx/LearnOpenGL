@@ -5,6 +5,9 @@ in vec3 v_normal;
 in vec3 v_tangent;
 in vec3 v_viewDir;
 in vec3 v_lightDir;
+
+uniform sampler2D texDiffuse;
+uniform sampler2D texSpecular;
  
 out vec4 color;
 
@@ -19,8 +22,8 @@ void main()
 {
 	float a = 64.0;
 
-	vec3 cdiff = vec3(0.3, 0.58, .8);
-	vec3 cspec = vec3(1, 1, 1);
+	vec3 cdiff = texture(texDiffuse, v_uv).rgb;
+	vec3 cspec = texture(texSpecular, v_uv).rgb;
 	vec3 clight = vec3(1, 1, 1);
 
 	vec3 normal = normalize(v_normal);
@@ -31,5 +34,9 @@ void main()
 
 	vec3 spec = (a + 2.0) * 0.125 * pow(dot(normal, half), a) * Fresnel(cspec, lightDir, half);
 
-	color = vec4((cdiff + spec) * clight * max(dot(normal, lightDir), 0), 1);
+	float max_spec = max(max(spec.r, spec.g), spec.b);
+
+	vec3 diff = cdiff * (1 - max_spec);
+
+	color = vec4((diff + spec) * clight * max(dot(normal, lightDir), 0), 1);
 }
