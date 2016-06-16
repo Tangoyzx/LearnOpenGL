@@ -18,6 +18,7 @@
 #include "ExampleDeferred.h"
 #include "ExamplePBR.h"
 #include "ExampleMipmap.h"
+#include "ExampleIBL.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -75,7 +76,7 @@ int main()
 	GLuint uboId = GetCommonUniformBuffer();
 	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboId);
 	
-	auto example = new ExamplePBR();
+	auto example = new ExampleIBL();
 	//auto example = new Example2();
 	example->Init(camera, uboId);
 

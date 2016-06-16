@@ -16,3 +16,7 @@
 ## ExamplePBR更新 + ExampleMipmap （2016/6/12）
 
 修改了一下PBR，测试了一下mipmap准备把环境贴图应用到PBR上
+
+## ExampleIBL
+
+尝试实现一下UE4的IBL的效果，不太理想，roughness和NdotV的LUT好像0,0点有点问题

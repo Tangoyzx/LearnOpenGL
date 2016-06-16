@@ -8,22 +8,29 @@ in vec3 v_lightDir;
 
 uniform sampler2D texDiffuse;
 uniform sampler2D texSpecular;
+uniform sampler2D texLut;
+uniform samplerCube texCube;
+
+uniform float roughness;
  
 out vec4 color;
 
 void main()
 {
-	float roughness = 0.6;
 	float pi = 3.1415926535;
 	
 	vec3 cdiff = texture(texDiffuse, v_uv).rgb;
 	vec3 cspec = texture(texSpecular, v_uv).rgb;
 	vec3 clight = vec3(1, 1, 1);
 
+	cdiff = vec3(0.5, 0.2, 0.2);
+	cspec = vec3(0.2, 0.2, 0.2);
+			
 	vec3 normal = normalize(v_normal);
 	vec3 viewDir = normalize(v_viewDir);
 	vec3 lightDir = normalize(v_lightDir);
 	vec3 halfDir = normalize(viewDir + lightDir);
+	vec3 reflectDir = normalize(reflect(-viewDir, normal));
 
 	float nv = clamp(dot(normal, viewDir), 0, 1);
 	float nl = clamp(dot(normal, lightDir), 0, 1);
@@ -48,11 +55,20 @@ void main()
 	vec3 F = cspec + (1 - cspec) * olh5;
 
 	vec3 spec = max(D * F * G / (4 * nl * nv), 0);
-
+	
 	float max_spec = max(max(spec.r, spec.g), spec.b);
 	vec3 diff = cdiff * (1 - max_spec);
 
-	vec3 all = ( diff + spec) * clight * nl;
+	vec3 all = ( diff + spec) * clight * nl * 0.8 + 0.2 * cdiff;
 
-	color = vec4(all, 1);
+	//color = vec4(all, 1);
+
+
+	vec2 EnvBRDF = texture(texLut, vec2(0.1, nv)).rg;
+	//color = texture(texLut, v_uv);
+	//color = vec4(EnvBRDF, 0, 1);
+
+	vec3 ibl_color = texture(texCube, reflectDir).rgb * (cspec * EnvBRDF.x + EnvBRDF.y) * 0.5;
+	
+	color = vec4(ibl_color + all, 1);
 }

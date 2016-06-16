@@ -15,12 +15,21 @@ public:
 		this->m_shader = new Shader("shaders/pbr/Skybox.vs", "shaders/pbr/Skybox.fs");		
 	}
 
+	Skybox(GLuint texCube) {
+		this->m_box = new Model("res/skybox.obj");
+
+		this->m_cubeTex = texCube;
+
+		this->m_shader = new Shader("shaders/pbr/Skybox.vs", "shaders/pbr/Skybox.fs");
+	}
+
 	~Skybox() {
 
 	}
 
 	void Render() {
 		glDisable(GL_CULL_FACE);
+		glDepthMask(false);
 		this->m_shader->Use();
 
 		glActiveTexture(GL_TEXTURE0);
@@ -29,6 +38,7 @@ public:
 
 		this->m_box->Draw(this->m_shader);
 		glEnable(GL_CULL_FACE);
+		glDepthMask(true);
 	}
 	Model *m_box;
 	GLuint m_cubeTex;

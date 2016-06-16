@@ -121,6 +121,7 @@
     <ClInclude Include="Example2.h" />
     <ClInclude Include="ExampleBase.h" />
     <ClInclude Include="ExampleDeferred.h" />
+    <ClInclude Include="ExampleIBL.h" />
     <ClInclude Include="ExampleMipmap.h" />
     <ClInclude Include="ExamplePBR.h" />
     <ClInclude Include="Matrix.h" />

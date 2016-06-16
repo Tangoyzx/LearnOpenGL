@@ -26,7 +26,7 @@ public:
 
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, this->m_texSpecular);
-		
+
 		for (int i = 0; i < this->fragment_size; i++)
 		{
 			glUniform1i(glGetUniformLocation(this->m_shaders[i]->Program, "cube_texture"), 0);
@@ -50,7 +50,7 @@ protected:
 		auto model = new Model("res/sphere.obj");
 
 		const char *vertexPath = "shaders/Simple.vs";
-		
+
 		for (int i = 0; i < this->fragment_size; i++)
 		{
 			auto ro = new RenderObject(model);

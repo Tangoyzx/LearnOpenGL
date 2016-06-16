@@ -15,16 +15,27 @@
 
 #define SOIL_CHECK_FOR_GL_ERRORS 0
 
-#ifdef WIN32
+#ifdef _WIN64
+	#define WIN64_LEAN_AND_MEAN
+	#include <windows.h>
+	#include <wingdi.h>
+	#include <GL/gl.h>
+#elif defined _WIN32
 	#define WIN32_LEAN_AND_MEAN
 	#include <windows.h>
 	#include <wingdi.h>
+	#include <GL/glew.h>
 	#include <GL/gl.h>
 #elif defined(__APPLE__) || defined(__APPLE_CC__)
 	/*	I can't test this Apple stuff!	*/
 	#include <OpenGL/gl.h>
 	#include <Carbon/Carbon.h>
 	#define APIENTRY
+#elif defined(__ANDROID__)
+	#include <GLES/gl.h>
+	#define APIENTRY
+#elif defined(__EMSCRIPTEN__)
+	#include <GL/gl.h>
 #else
 	#include <GL/gl.h>
 	#include <GL/glx.h>
@@ -1342,8 +1353,7 @@ unsigned int
 			check_for_GL_errors( "GL_TEXTURE_WRAP_*" );
 		} else
 		{
-			/*	unsigned int clamp_mode = SOIL_CLAMP_TO_EDGE;	*/
-			unsigned int clamp_mode = GL_CLAMP;
+			unsigned int clamp_mode = SOIL_CLAMP_TO_EDGE;
 			glTexParameteri( opengl_texture_type, GL_TEXTURE_WRAP_S, clamp_mode );
 			glTexParameteri( opengl_texture_type, GL_TEXTURE_WRAP_T, clamp_mode );
 			if( opengl_texture_type == SOIL_TEXTURE_CUBE_MAP )
@@ -1809,8 +1819,7 @@ unsigned int SOIL_direct_load_DDS_from_memory(
 			glTexParameteri( opengl_texture_type, SOIL_TEXTURE_WRAP_R, GL_REPEAT );
 		} else
 		{
-			/*	unsigned int clamp_mode = SOIL_CLAMP_TO_EDGE;	*/
-			unsigned int clamp_mode = GL_CLAMP;
+			unsigned int clamp_mode = SOIL_CLAMP_TO_EDGE;
 			glTexParameteri( opengl_texture_type, GL_TEXTURE_WRAP_S, clamp_mode );
 			glTexParameteri( opengl_texture_type, GL_TEXTURE_WRAP_T, clamp_mode );
 			glTexParameteri( opengl_texture_type, SOIL_TEXTURE_WRAP_R, clamp_mode );
@@ -1877,8 +1886,9 @@ int query_NPOT_capability( void )
 	{
 		/*	we haven't yet checked for the capability, do so	*/
 		if(
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_ARB_texture_non_power_of_two" ) )
+			(!SOIL_has_extension( "GL_ARB_texture_non_power_of_two" ) )
+		&&
+			(!SOIL_has_extension( "GL_OES_texture_npot" ) )
 			)
 		{
 			/*	not there, flag the failure	*/
@@ -1900,14 +1910,11 @@ int query_tex_rectangle_capability( void )
 	{
 		/*	we haven't yet checked for the capability, do so	*/
 		if(
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_ARB_texture_rectangle" ) )
+			(!SOIL_has_extension( "GL_ARB_texture_rectangle" ) )
 		&&
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_EXT_texture_rectangle" ) )
+			(!SOIL_has_extension( "GL_EXT_texture_rectangle" ) )
 		&&
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_NV_texture_rectangle" ) )
+			(!SOIL_has_extension( "GL_NV_texture_rectangle" ) )
 			)
 		{
 			/*	not there, flag the failure	*/
@@ -1929,11 +1936,12 @@ int query_cubemap_capability( void )
 	{
 		/*	we haven't yet checked for the capability, do so	*/
 		if(
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_ARB_texture_cube_map" ) )
+			(!SOIL_has_extension( "GL_ARB_texture_cube_map" ) )
 		&&
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_EXT_texture_cube_map" ) )
+			(!SOIL_has_extension( "GL_EXT_texture_cube_map" ) )
+		#ifdef GL_ES_VERSION_2_0
+		&& (0) /* GL ES 2.0 supports cubemaps, always enable */
+		#endif
 			)
 		{
 			/*	not there, flag the failure	*/
@@ -1994,6 +2002,8 @@ int query_DXT_capability( void )
 				CFRelease( bundleURL );
 				CFRelease( extensionName );
 				CFRelease( bundle );
+			#elif defined(__ANDROID__) || defined(__EMSCRIPTEN__)
+				ext_addr = (P_SOIL_GLCOMPRESSEDTEXIMAGE2DPROC)(glCompressedTexImage2D);
 			#else
 				ext_addr = (P_SOIL_GLCOMPRESSEDTEXIMAGE2DPROC)
 						glXGetProcAddressARB
@@ -2021,4 +2031,33 @@ int query_DXT_capability( void )
 	}
 	/*	let the user know if we can do DXT or not	*/
 	return has_DXT_capability;
+}
+
+int SOIL_has_extension(const char * ext_name_to_check)
+{
+	int i;
+	int ext_count;
+	int gl_major;
+
+	glGetIntegerv(GL_MAJOR_VERSION, &gl_major);
+	if (gl_major < 3)
+	{
+		/* Backwards compatibilty for OpenGL 2.1 and earlier */
+		return (NULL != strstr((char const*)glGetString(GL_EXTENSIONS),
+			ext_name_to_check));
+	}
+	else
+	{
+		/* For OpenGL 3.0 and newer, walk through each available extension */
+		glGetIntegerv(GL_NUM_EXTENSIONS, &ext_count);
+		for (i = 0; i < ext_count; i++)
+		{
+			if (0 == strcmp(ext_name_to_check,
+				(char const*)glGetStringi(GL_EXTENSIONS, i)))
+			{
+				return 1;
+			}
+		}
+		return 0;
+	}
 }
