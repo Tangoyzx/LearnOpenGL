@@ -21,7 +21,7 @@ void main()
 	
 	vec3 cdiff = texture(texDiffuse, v_uv).rgb;
 	vec3 cspec = texture(texSpecular, v_uv).rgb;
-	vec3 clight = vec3(1, 1, 1);
+	vec3 clight = vec3(0.8, 0.8, 0.8);
 
 	cdiff = vec3(0.5, 0.2, 0.2);
 	cspec = vec3(0.2, 0.2, 0.2);

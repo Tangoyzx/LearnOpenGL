@@ -16,7 +16,7 @@ public:
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
-		this->SetupCommonUbo(this->m_camera, glm::vec4(1, 1, 1, 0));
+		this->SetupCommonUbo(this->m_camera, glm::vec4(-1, 1, -1, 0));
 
 		this->m_skybox->Render();
 
