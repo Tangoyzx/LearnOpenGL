@@ -33,8 +33,12 @@ void main()
 	//gl_Position = projection * vec4(v_pos, 1);
 
 	v_uv = uv;
+
+	vec3 worldNormal;
 	
-	v_normal.x = invModel[0].x * normal.x + invModel[0].y * normal.y + invModel[0].z * normal.z;
-	v_normal.y = invModel[1].x * normal.x + invModel[1].y * normal.y + invModel[1].z * normal.z;
-	v_normal.z = invModel[2].x * normal.x + invModel[2].y * normal.y + invModel[2].z * normal.z;
+	worldNormal.x = invModel[0].x * normal.x + invModel[0].y * normal.y + invModel[0].z * normal.z;
+	worldNormal.y = invModel[1].x * normal.x + invModel[1].y * normal.y + invModel[1].z * normal.z;
+	worldNormal.z = invModel[2].x * normal.x + invModel[2].y * normal.y + invModel[2].z * normal.z;
+
+	v_normal = (view * vec4(worldNormal, 0)).xyz;
 }

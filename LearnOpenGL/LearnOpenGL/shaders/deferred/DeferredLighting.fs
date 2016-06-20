@@ -46,7 +46,7 @@ vec3 getWorldPos(vec2 screenUv, float depth)
 	float newZ = a * -depth + b;
 
 	vec4 newP = vec4(newUv.x * depth, newUv.y * depth, newZ, depth);
-	return (invView * (invProjection * newP)).xyz;
+	return (invProjection * newP).xyz;
 }
 
 float DotClamped(vec3 a, vec3 b)
@@ -73,8 +73,9 @@ void main()
 
 	for(int i = 0; i < LIGHT_NUM; i++)
 	{
+		vec4 lightViewPos = view * lights[i].Position;
 		// Diffuse
-        vec3 lightDir = (lights[i].Position.xyz - position * lights[i].Position.w);
+        vec3 lightDir = (lightViewPos.xyz - position * lightViewPos.w);
 		float distance = length(lightDir);
 		lightDir = normalize(lightDir);
 
