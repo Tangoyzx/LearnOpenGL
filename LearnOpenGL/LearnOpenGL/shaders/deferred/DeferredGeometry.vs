@@ -14,7 +14,11 @@ layout (std140) uniform Matrices
 	mat4 view;			//4 * 16
 	vec3 cameraPos;		//16
 	vec4 mainLight;		//16
+	vec4 projParams;	//16
+	mat4 invProjection;	//4 * 16
+	mat4 invView;		//4 * 16
 };
+
 
 out vec2 v_uv;
 out vec3 v_pos;
@@ -22,8 +26,11 @@ out vec3 v_normal;
 
 void main()
 {
-	v_pos = (model * vec4(position, 1.0f)).xyz;
-	gl_Position = projection * view * vec4(v_pos, 1);
+	v_pos = (view * model * vec4(position, 1.0f)).xyz;
+	gl_Position = projection * vec4(v_pos, 1);
+
+	//v_pos = (view * model * vec4(position, 1.0f)).xyz;
+	//gl_Position = projection * vec4(v_pos, 1);
 
 	v_uv = uv;
 	

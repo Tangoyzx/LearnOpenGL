@@ -12,7 +12,11 @@ public:
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix();
 	bool isUse;
+	float GetNear();
+	float GetFar();
+	glm::mat4 GetInverseProjectionMatrix();
 private:
+	float m_near, m_far;
 	Matrix *m_transform;
-	glm::mat4 m_projection;
+	glm::mat4 m_projection, m_inverseProjection;
 };

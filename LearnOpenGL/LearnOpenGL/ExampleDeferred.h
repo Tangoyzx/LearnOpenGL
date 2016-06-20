@@ -86,7 +86,7 @@ protected:
 
 		glGenTextures(1, &this->m_texPosition);
 		glBindTexture(GL_TEXTURE_2D, this->m_texPosition);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->m_texPosition, 0);
@@ -124,7 +124,7 @@ protected:
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 		glCullFace(GL_BACK);
-		glDepthFunc(GL_LEQUAL);
+		glDepthFunc(GL_LESS);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		this->InitGBuffer();
@@ -139,14 +139,14 @@ protected:
 			for (int j = 0; j < 10; j++) 
 			{
 				auto ro = new RenderObject(model);
-				ro->GetTransform()->SetTranslation(i * 2, -3, j * 2);
+				ro->GetTransform()->SetTranslation(i * 2 - 10, -3, -j * 2);
 				this->m_renderObjs.push_back(ro);
 			}
 		}
 
 		for (int i = 0; i < 100; i++)
 		{
-			this->m_lightsPos.push_back(glm::vec4(rand()%20, rand() % 4 - 5, rand() % 20, 1));
+			this->m_lightsPos.push_back(glm::vec4(rand()%20 - 10, rand() % 4 - 5, -rand() % 20, 1));
 			this->m_lightsColor.push_back(glm::vec4(rand() % 100*0.01, rand() % 100 * 0.01, rand() % 100 * 0.01, 1));
 			//this->m_lightsColor.push_back(glm::vec4(1, 0, 0, 1));
 		}
