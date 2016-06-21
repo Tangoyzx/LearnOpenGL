@@ -20,3 +20,9 @@
 ## ExampleIBL
 
 尝试实现一下UE4的IBL的效果，不太理想，roughness和NdotV的LUT好像0,0点有点问题
+
+## ExampleDeferred 更新 + ExampleSSAO
+
+Deferred的Depth保存1-深度，保证Clear的时候没有被绘制的点是最远端。
+
+增加一个SSAO的例子，为了更明显使用的时候改成了ao的平方。

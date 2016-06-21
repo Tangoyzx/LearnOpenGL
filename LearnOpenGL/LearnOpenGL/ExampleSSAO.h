@@ -1,5 +1,7 @@
 #pragma once
 
+#include <random>
+
 #include "ExampleBase.h"
 #include "ScreenQuadMesh.h"
 #include "Shader.h"
@@ -11,8 +13,8 @@ public:
 	void OnTick() override {
 		this->RenderGBufferGeometry();
 		this->RenderSSAO();
-		//this->RenderBlurSSAO();
-		//this->RenderGBufferLighting();
+		this->RenderBlurSSAO();
+		this->RenderGBufferLighting();
 	}
 protected:
 	ScreenQuadMesh *m_screenQuad;
@@ -25,7 +27,7 @@ protected:
 	vector<glm::vec4> m_lightsPos;
 
 	vector<RenderObject*> m_renderObjs;
-	RenderObject *m_desk, *m_cube, *m_sphere;
+	RenderObject *m_cube0, *m_cube1, *m_cube2, *m_sphere;
 
 	int SCREEN_WIDTH = 640;
 	int SCREEN_HEIGHT = 640;
@@ -45,8 +47,9 @@ protected:
 		glBindTexture(GL_TEXTURE_2D, this->m_texSpec);
 		glUniform1i(glGetUniformLocation(this->m_gGeometryShader->Program, "tex_spec"), 1);
 
-		this->m_desk->Render(this->m_gGeometryShader);
-		this->m_cube->Render(this->m_gGeometryShader);
+		this->m_cube0->Render(this->m_gGeometryShader);
+		this->m_cube1->Render(this->m_gGeometryShader);
+		this->m_cube2->Render(this->m_gGeometryShader);
 		this->m_sphere->Render(this->m_gGeometryShader);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -55,7 +58,7 @@ protected:
 	void RenderSSAO()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, this->m_fboSSAO);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		this->m_shaderSSAO->Use();
@@ -78,11 +81,25 @@ protected:
 		}
 
 		this->m_screenQuad->Draw(this->m_shaderSSAO);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	void RenderBlurSSAO()
 	{
+		glBindFramebuffer(GL_FRAMEBUFFER, this->m_fboBlurSSAO);
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		this->m_shaderBlurSSAO->Use();
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, this->m_texSSAO);
+		glUniform1i(glGetUniformLocation(this->m_shaderBlurSSAO->Program, "tex_ssao"), 0);
+
+		this->m_screenQuad->Draw(this->m_shaderBlurSSAO);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	void RenderGBufferLighting()
@@ -103,6 +120,10 @@ protected:
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, this->m_texAlbedoSpec);
 		glUniform1i(glGetUniformLocation(this->m_gLightingShader->Program, "tex_albedoSpec"), 2);
+
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, this->m_texBlurSSAO);
+		glUniform1i(glGetUniformLocation(this->m_gLightingShader->Program, "tex_blurSSAO"), 3);
 
 		for (GLuint i = 0; i < this->m_lightsColor.size(); i++)
 		{
@@ -155,7 +176,7 @@ protected:
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		this->m_gGeometryShader = new Shader("shaders/deferred/DeferredGeometry.vs", "shaders/deferred/DeferredGeometry.fs");
-		this->m_gLightingShader = new Shader("shaders/deferred/DeferredLighting.vs", "shaders/deferred/DeferredLighting.fs");
+		this->m_gLightingShader = new Shader("shaders/deferred/DeferredLighting.vs", "shaders/deferred/SSAOLighting.fs");
 	}
 
 	void ChildInit() override
@@ -174,20 +195,25 @@ protected:
 
 		auto model = new Model("res/sphere.obj");
 
-		this->m_desk = new RenderObject(new Model("res/cube.obj"));
-		this->m_desk->GetTransform()->SetTranslation(-1, -5, -9);
-		this->m_desk->GetTransform()->SetScale(3, 1, 3);
+		this->m_cube0 = new RenderObject(new Model("res/cube.obj"));
+		this->m_cube0->GetTransform()->SetTranslation(-1, 1, -7);
 
-		this->m_cube = new RenderObject(new Model("res/cube.obj"));
-		this->m_cube->GetTransform()->SetTranslation(-1, -3, -9);
+		this->m_cube1 = new RenderObject(new Model("res/cube.obj"));
+		this->m_cube1->GetTransform()->SetTranslation(-1, -1, -5);
+
+		this->m_cube2 = new RenderObject(new Model("res/cube.obj"));
+		this->m_cube2->GetTransform()->SetTranslation(1, 1, -5);
 
 		this->m_sphere = new RenderObject(new Model("res/sphere.obj"));
-		this->m_sphere->GetTransform()->SetTranslation(1, -3, -9);
+		this->m_sphere->GetTransform()->SetTranslation(-1, 1, -5);
 
-		for (int i = 0; i < 100; i++)
+		//for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1; i++)
 		{
-			this->m_lightsPos.push_back(glm::vec4(rand() % 20 - 10, rand() % 4 - 5, -rand() % 20, 1));
-			this->m_lightsColor.push_back(glm::vec4(rand() % 100 * 0.01, rand() % 100 * 0.01, rand() % 100 * 0.01, 1));
+			//this->m_lightsPos.push_back(glm::vec4(rand() % 20 - 10, rand() % 4 - 5, -rand() % 20, 1));
+			//this->m_lightsColor.push_back(glm::vec4(rand() % 100 * 0.01, rand() % 100 * 0.01, rand() % 100 * 0.01, 1));
+			this->m_lightsPos.push_back(glm::vec4(-3, 2, 1, 0));
+			this->m_lightsColor.push_back(glm::vec4(0.2, 0.2, 0.2, 1));
 			//this->m_lightsColor.push_back(glm::vec4(1, 0, 0, 1));
 		}
 

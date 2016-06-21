@@ -35,7 +35,7 @@ vec4 EncodeFloatRGBA( float v )
 void main()
 {
 	//gPosition = v_pos * 0.05 + 0.5;
-	gPosition = EncodeFloatRGBA(-v_pos.z / projParams.y);
+	gPosition = EncodeFloatRGBA(1 + v_pos.z / projParams.y);
 	//gPosition = vec4(1, 1, 0, 1);
 	gNormal = normalize(v_normal) * 0.5 + 0.5;
 	gAlbedoSpec.rgb = texture(tex_diffuse, v_uv).rgb;

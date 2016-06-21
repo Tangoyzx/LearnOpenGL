@@ -1,14 +1,13 @@
 #version 330 core
 
 in vec2 v_uv;
-in vec3 v_cameraPos;
 
-out vec4 color;
+out float color;
 
 uniform vec3 samples[64];
 
 const vec2 noiseScale = vec2(640.0 * 0.25, 640.0 * 0.25);
-const float radius = 0.5;
+const float radius = 1.0;
 
 uniform sampler2D tex_position;
 uniform sampler2D tex_normal;
@@ -56,10 +55,8 @@ float Pow5(float x)
 
 void main() 
 {
-	vec3 position = getViewPos(v_uv, DecodeFloatRGBA(texture(tex_position, v_uv)) * projParams.y);
+	vec3 position = getViewPos(v_uv, (1 - DecodeFloatRGBA(texture(tex_position, v_uv))) * projParams.y);
 	
-	color = vec4(position, 1);
-	return;
 	vec3 normal = normalize(texture(tex_normal, v_uv).rgb * 2 - 1);
 
 	vec3 randomVec = texture(tex_noise, v_uv * noiseScale).xyz;
@@ -81,8 +78,7 @@ void main()
 		offset.xyz /= offset.w;
 		offset.xyz = offset.xyz * 0.5 + 0.5;
 
-		
-		float sampleDepth = -DecodeFloatRGBA(texture(tex_position, offset.xy)) * projParams.y;
+		float sampleDepth = -(1 - DecodeFloatRGBA(texture(tex_position, offset.xy))) * projParams.y;
 
 		float rangeCheck = smoothstep(0.0, 1.0, radius / abs(position.z - sampleDepth));
 
@@ -92,5 +88,5 @@ void main()
 
 	occlusion = 1.0 - (occlusion / 64);
 
-	color = vec4(occlusion, occlusion, occlusion, 1);
+	color = occlusion;
 }

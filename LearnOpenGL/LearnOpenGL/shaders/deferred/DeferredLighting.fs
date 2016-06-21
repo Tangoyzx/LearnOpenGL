@@ -61,7 +61,7 @@ float Pow5(float x)
 
 void main() 
 {
-	vec3 position = getViewPos(v_uv, DecodeFloatRGBA(texture(tex_position, v_uv)) * projParams.y);
+	vec3 position = getViewPos(v_uv, (1 - DecodeFloatRGBA(texture(tex_position, v_uv))) * projParams.y);
 	vec3 normal = normalize(texture(tex_normal, v_uv).rgb * 2 - 1);
 	vec4 albedoSpec = texture(tex_albedoSpec, v_uv);
 

@@ -152,6 +152,7 @@
     <None Include="shaders\deferred\DeferredLighting.vs" />
     <None Include="shaders\deferred\SSAO.fs" />
     <None Include="shaders\deferred\SSAOBlur.fs" />
+    <None Include="shaders\deferred\SSAOLighting.fs" />
     <None Include="shaders\mipmap\Mipmap.fs" />
     <None Include="shaders\mipmap\Mipmap_1.fs" />
     <None Include="shaders\ParallaxMapping.fs" />
