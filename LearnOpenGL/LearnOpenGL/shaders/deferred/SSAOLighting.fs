@@ -27,8 +27,6 @@ layout (std140) uniform Matrices
 	vec3 cameraPos;		//16
 	vec4 mainLight;		//16
 	vec4 projParams;	//16
-	mat4 invProjection;	//4 * 16
-	mat4 invView;		//4 * 16
 };
 
 float DecodeFloatRGBA( vec4 enc )
@@ -40,14 +38,9 @@ float DecodeFloatRGBA( vec4 enc )
 vec3 getViewPos(vec2 screenUv, float depth)
 {
 	vec2 newUv = screenUv * 2 - 1;
-	float offset = projParams.y - projParams.x;
-	float a = -projParams.z / offset;
-	float b = (-2* projParams.w) / offset;
+	vec2 viewRay = vec2(newUv.x * projParams.z * projParams.w, newUv.y * projParams.z);
 
-	float newZ = a * -depth + b;
-
-	vec4 newP = vec4(newUv.x * depth, newUv.y * depth, newZ, depth);
-	return (invProjection * newP).xyz;
+	return vec3(viewRay * depth, -depth);
 }
 
 float DotClamped(vec3 a, vec3 b)
@@ -69,7 +62,7 @@ void main()
 	vec3 viewDir = normalize(-position);
 
 	float ao = texture(tex_blurSSAO, v_uv).r;
-
+	
 	vec3 lighting = albedoSpec.rgb * 0.3 * ao * ao;
 
 	for(int i = 0; i < LIGHT_NUM; i++)

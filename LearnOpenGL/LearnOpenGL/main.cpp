@@ -168,7 +168,7 @@ GLuint GetCommonUniformBuffer()
 	GLuint uboId;
 	glGenBuffers(1, &uboId);
 	glBindBuffer(GL_UNIFORM_BUFFER, uboId);
-	glBufferData(GL_UNIFORM_BUFFER, 304, NULL, GL_STATIC_DRAW);
+	glBufferData(GL_UNIFORM_BUFFER, 176, NULL, GL_STATIC_DRAW);
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	return uboId;
 }

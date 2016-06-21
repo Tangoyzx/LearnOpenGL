@@ -12,10 +12,7 @@ layout (std140) uniform Matrices
 	vec3 cameraPos;		//16
 	vec4 mainLight;		//16
 	vec4 projParams;	//16
-	mat4 invProjection;	//4 * 16
-	mat4 invView;		//4 * 16
 };
-
 
 
 out vec2 v_uv;

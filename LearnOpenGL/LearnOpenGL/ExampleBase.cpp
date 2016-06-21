@@ -31,9 +31,7 @@ void ExampleBase::SetupCommonUbo(Camera *camera, glm::vec4 &lightPos)
 	glBufferSubData(GL_UNIFORM_BUFFER, 64, 64, glm::value_ptr(camera->GetViewMatrix()));
 	glBufferSubData(GL_UNIFORM_BUFFER, 128, 16, glm::value_ptr(camera->GetTransform()->GetTranslation()));
 	glBufferSubData(GL_UNIFORM_BUFFER, 144, 16, glm::value_ptr(lightPos));
-	glBufferSubData(GL_UNIFORM_BUFFER, 160, 16, glm::value_ptr(glm::vec4(camera->GetNear(), camera->GetFar(), camera->GetNear() + camera->GetFar(), camera->GetNear() * camera->GetFar())));
-	glBufferSubData(GL_UNIFORM_BUFFER, 176, 64, glm::value_ptr(camera->GetInverseProjectionMatrix()));
-	glBufferSubData(GL_UNIFORM_BUFFER, 240, 64, glm::value_ptr(camera->GetTransform()->glmMat()));
+	glBufferSubData(GL_UNIFORM_BUFFER, 160, 16, glm::value_ptr(glm::vec4(camera->GetNear(), camera->GetFar(), camera->getTanHalfFov(), camera->getAspect())));
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
 
