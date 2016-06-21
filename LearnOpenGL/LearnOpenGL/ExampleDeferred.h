@@ -23,6 +23,7 @@ protected:
 	vector<glm::vec4> m_lightsPos;
 
 	vector<RenderObject*> m_renderObjs;
+	RenderObject *m_desk;
 	
 	int SCREEN_WIDTH = 640;
 	int SCREEN_HEIGHT = 640;
@@ -42,6 +43,7 @@ protected:
 		glBindTexture(GL_TEXTURE_2D, this->m_texSpec);
 		glUniform1i(glGetUniformLocation(this->m_gGeometryShader->Program, "tex_spec"), 1);
 
+		this->m_desk->Render(this->m_gGeometryShader);
 		for (int i = 0; i < this->m_renderObjs.size(); i++)
 		{
 			this->m_renderObjs[i]->Render(this->m_gGeometryShader);
@@ -143,6 +145,10 @@ protected:
 				this->m_renderObjs.push_back(ro);
 			}
 		}
+
+		this->m_desk = new RenderObject(new Model("res/cube.obj"));
+		this->m_desk->GetTransform()->SetTranslation(-1, -5, -9);
+		this->m_desk->GetTransform()->SetScale(10, 1, 10);
 
 		for (int i = 0; i < 100; i++)
 		{
