@@ -124,6 +124,7 @@
     <ClInclude Include="ExampleIBL.h" />
     <ClInclude Include="ExampleMipmap.h" />
     <ClInclude Include="ExamplePBR.h" />
+    <ClInclude Include="ExampleSSAO.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
@@ -149,6 +150,8 @@
     <None Include="shaders\deferred\DeferredGeometry.vs" />
     <None Include="shaders\deferred\DeferredLighting.fs" />
     <None Include="shaders\deferred\DeferredLighting.vs" />
+    <None Include="shaders\deferred\SSAO.fs" />
+    <None Include="shaders\deferred\SSAOBlur.fs" />
     <None Include="shaders\mipmap\Mipmap.fs" />
     <None Include="shaders\mipmap\Mipmap_1.fs" />
     <None Include="shaders\ParallaxMapping.fs" />

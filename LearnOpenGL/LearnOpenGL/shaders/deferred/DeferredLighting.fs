@@ -36,7 +36,7 @@ float DecodeFloatRGBA( vec4 enc )
 	return dot( enc, kDecodeDot );
 }
 
-vec3 getWorldPos(vec2 screenUv, float depth)
+vec3 getViewPos(vec2 screenUv, float depth)
 {
 	vec2 newUv = screenUv * 2 - 1;
 	float offset = projParams.y - projParams.x;
@@ -61,11 +61,11 @@ float Pow5(float x)
 
 void main() 
 {
-	vec3 position = getWorldPos(v_uv, DecodeFloatRGBA(texture(tex_position, v_uv)) * projParams.y);
+	vec3 position = getViewPos(v_uv, DecodeFloatRGBA(texture(tex_position, v_uv)) * projParams.y);
 	vec3 normal = normalize(texture(tex_normal, v_uv).rgb * 2 - 1);
 	vec4 albedoSpec = texture(tex_albedoSpec, v_uv);
 
-	vec3 viewDir = normalize(cameraPos - position);
+	vec3 viewDir = normalize(-position);
 
 	vec3 lighting = albedoSpec.rgb * 0.1;
 

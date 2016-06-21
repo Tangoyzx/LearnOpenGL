@@ -81,6 +81,9 @@
     <ClInclude Include="ExampleIBL.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ExampleSSAO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -162,6 +165,12 @@
     </None>
     <None Include="shaders\pbr\UE4.fs">
       <Filter>源文件\shaders\pbr</Filter>
+    </None>
+    <None Include="shaders\deferred\SSAO.fs">
+      <Filter>源文件\shaders\deferred</Filter>
+    </None>
+    <None Include="shaders\deferred\SSAOBlur.fs">
+      <Filter>源文件\shaders\deferred</Filter>
     </None>
   </ItemGroup>
 </Project>
