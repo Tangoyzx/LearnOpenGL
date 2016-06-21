@@ -18,22 +18,23 @@ public:
 
 		glDepthMask(GL_TRUE);
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, this->m_skybox->m_cubeTex);
-
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, this->m_texDiffuse);
-
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, this->m_texSpecular);
 
 		for (int i = 0; i < this->fragment_size; i++)
 		{
+			this->m_shaders[i]->Use();
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, this->m_skybox->m_cubeTex);
 			glUniform1i(glGetUniformLocation(this->m_shaders[i]->Program, "cube_texture"), 0);
+
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, this->m_texDiffuse);
 			glUniform1i(glGetUniformLocation(this->m_shaders[i]->Program, "texDiffuse"), 1);
+
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, this->m_texSpecular);
 			glUniform1i(glGetUniformLocation(this->m_shaders[i]->Program, "texSpecular"), 2);
 
-			this->m_shaders[i]->Use();
 			this->m_ros[i]->Render(this->m_shaders[i]);
 		}
 	}

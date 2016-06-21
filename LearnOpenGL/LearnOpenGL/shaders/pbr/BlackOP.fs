@@ -16,12 +16,18 @@ vec3 Fresnel(vec3 cspec, vec3 lightDir, vec3 half)
 	return cspec + (1 - cspec) * pow(1 - dot(lightDir, half), 5);
 }
 
+float Pow5(float x)
+{
+	return x * x * x * x * x;
+}
+
 //http://blog.selfshadow.com/publications/s2013-shading-course/lazarov/s2013_pbs_black_ops_2_slides_v2.pdf
 
 void main() 
 {
-	float a = 64.0;
-	float pi = 3.1415926535;
+	float gloss = 0.8;
+	float PI = 3.1415926535;
+	float a = pow(8192, gloss);
 
 	vec3 cdiff = texture(texDiffuse, v_uv).rgb;
 	vec3 cspec = texture(texSpecular, v_uv).rgb;
@@ -31,14 +37,24 @@ void main()
 	vec3 viewDir = normalize(v_viewDir);
 	vec3 lightDir = normalize(v_lightDir);
 
-	vec3 half = normalize(viewDir + lightDir);
+	vec3 halfDir = normalize(viewDir + lightDir);
 
-	float D = (a + 2) * 0.125 * pow(dot(normal, half), a) * 0.25 * pi;
-	vec3 F = Fresnel(cspec, lightDir, half);
-	float K = 2.0 / sqrt(pi * (a + 2));
-	float V = 1.0 / ((dot(normal, lightDir) * (1 - K) + K) * (dot(normal, viewDir) * (1 - K) + K)); 
+	float nh = max(dot(normal, halfDir), 0);
+	float hl = max(dot(halfDir, lightDir), 0);
+	float nl = max(dot(normal, lightDir), 0);
+	float nv = max(dot(normal, viewDir), 0);
 
-	vec3 spec = D * F * V;
+	float D = (a + 2) * 0.125 * pow(nh, a);
 
-	color = vec4((cdiff + spec) * clight * max(dot(normal, lightDir), 0), 1);
+	vec3 F = cspec + (1 - cspec) * Pow5(1 - hl);
+
+	float k = 2 / (sqrt(PI * (a + 2)));
+
+	float V = 1 / (((nl) * (1 - k) + k) * ((nv) * (1 - k) + k));
+
+	vec3 spec = max(D * F * V, 0);
+
+	vec3 all = (spec + cdiff) * clight * nl;
+
+	color = vec4(all, 1);
 }

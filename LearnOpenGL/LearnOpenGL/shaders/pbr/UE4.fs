@@ -68,7 +68,7 @@ void main()
 	//color = texture(texLut, v_uv);
 	//color = vec4(EnvBRDF, 0, 1);
 
-	vec3 ibl_color = texture(texCube, reflectDir).rgb * (cspec * EnvBRDF.x + EnvBRDF.y) * 0.5;
+	vec3 ibl_color = texture(texCube, reflectDir).rgb * (cspec * EnvBRDF.x + EnvBRDF.y);
 	
-	color = vec4(ibl_color + all, 1);
+	color = vec4(ibl_color, 1);
 }
