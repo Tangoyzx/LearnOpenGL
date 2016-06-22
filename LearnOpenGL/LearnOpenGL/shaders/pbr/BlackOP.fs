@@ -8,6 +8,8 @@ in vec3 v_lightDir;
 
 uniform sampler2D texDiffuse;
 uniform sampler2D texSpecular;
+
+uniform float roughness;
  
 out vec4 color;
 
@@ -25,18 +27,19 @@ float Pow5(float x)
 
 void main() 
 {
-	float gloss = 0.8;
+	float gloss = 1 - roughness;
 	float PI = 3.1415926535;
 	float a = pow(8192, gloss);
 
 	vec3 cdiff = texture(texDiffuse, v_uv).rgb;
 	vec3 cspec = texture(texSpecular, v_uv).rgb;
-	vec3 clight = vec3(1, 1, 1);
+	vec3 clight = vec3(0.8, 0.8, 0.8);
+	cdiff = vec3(0.8, 0.2, 0.2);
+	cspec = vec3(0.2, 0.2, 0.2);
 
 	vec3 normal = normalize(v_normal);
 	vec3 viewDir = normalize(v_viewDir);
 	vec3 lightDir = normalize(v_lightDir);
-
 	vec3 halfDir = normalize(viewDir + lightDir);
 
 	float nh = max(dot(normal, halfDir), 0);

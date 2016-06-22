@@ -23,7 +23,7 @@ void main()
 	vec3 cspec = texture(texSpecular, v_uv).rgb;
 	vec3 clight = vec3(0.8, 0.8, 0.8);
 
-	cdiff = vec3(0.5, 0.2, 0.2);
+	cdiff = vec3(0.8, 0.2, 0.2);
 	cspec = vec3(0.2, 0.2, 0.2);
 			
 	vec3 normal = normalize(v_normal);
@@ -61,14 +61,5 @@ void main()
 
 	vec3 all = ( diff + spec) * clight * nl * 0.8 + 0.2 * cdiff;
 
-	//color = vec4(all, 1);
-
-
-	vec2 EnvBRDF = texture(texLut, vec2(0.1, nv)).rg;
-	//color = texture(texLut, v_uv);
-	//color = vec4(EnvBRDF, 0, 1);
-
-	vec3 ibl_color = texture(texCube, reflectDir).rgb * (cspec * EnvBRDF.x + EnvBRDF.y);
-	
-	color = vec4(ibl_color, 1);
+	color = vec4(all, 1);
 }

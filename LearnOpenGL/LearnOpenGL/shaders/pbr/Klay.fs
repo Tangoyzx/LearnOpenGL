@@ -8,6 +8,8 @@ in vec3 v_lightDir;
 
 uniform sampler2D texDiffuse;
 uniform sampler2D texSpecular;
+
+uniform float roughness;
  
 out vec4 color;
 
@@ -20,11 +22,13 @@ vec3 Fresnel(vec3 cspec, vec3 lightDir, vec3 half)
 
 void main() 
 {
-	float a = 64.0;
+	float a = pow(8192, 1- roughness);
 
 	vec3 cdiff = texture(texDiffuse, v_uv).rgb;
 	vec3 cspec = texture(texSpecular, v_uv).rgb;
 	vec3 clight = vec3(1, 1, 1);
+	cdiff = vec3(0.8, 0.2, 0.2);
+	cspec = vec3(0.2, 0.2, 0.2);
 
 	vec3 normal = normalize(v_normal);
 	vec3 viewDir = normalize(v_viewDir);

@@ -34,6 +34,7 @@ public:
 		glBindTexture(GL_TEXTURE_2D, this->m_texLut);
 		glUniform1i(glGetUniformLocation(this->m_shader->Program, "texLut"), 2);
 
+		/*
 		for (int i = 0; i < 11; i++)
 		{
 			for (int j = 0; j < 11; j++)
@@ -53,6 +54,25 @@ public:
 
 				this->m_renderObj->Render(this->m_shader);
 			}
+		}
+		*/
+
+		for (int i = 0; i < 11; i++)
+		{
+			float roughness = i * 0.1;
+			float metallic = 1 - roughness;
+			glUniform1f(glGetUniformLocation(this->m_shader->Program, "roughness"), roughness);
+			glUniform1f(glGetUniformLocation(this->m_shader->Program, "metallic"), metallic);
+
+			int indexCube = min(floor(roughness * this->m_cubeTexs.size()), this->m_cubeTexs.size() - 1.0f);
+
+			glActiveTexture(GL_TEXTURE3);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, this->m_cubeTexs[indexCube]);
+			glUniform1i(glGetUniformLocation(this->m_shader->Program, "texCube"), 3);
+
+			this->m_renderObj->GetTransform()->SetTranslation(i * 2, 0, 0);
+
+			this->m_renderObj->Render(this->m_shader);
 		}
 	}
 
