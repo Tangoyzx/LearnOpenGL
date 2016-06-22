@@ -34,19 +34,25 @@ public:
 		glBindTexture(GL_TEXTURE_2D, this->m_texLut);
 		glUniform1i(glGetUniformLocation(this->m_shader->Program, "texLut"), 2);
 
-		for (int i = 0; i < this->m_roughness.size(); i++)
+		for (int i = 0; i < 11; i++)
 		{
-			glUniform1f(glGetUniformLocation(this->m_shader->Program, "roughness"), this->m_roughness[i]);
+			for (int j = 0; j < 11; j++)
+			{
+				float roughness = i * 0.1;
+				float metallic = j * 0.1;
+				glUniform1f(glGetUniformLocation(this->m_shader->Program, "roughness"), roughness);
+				glUniform1f(glGetUniformLocation(this->m_shader->Program, "metallic"), metallic);
 
-			float xx = floor(this->m_roughness[i] * this->m_cubeTexs.size());
-			int indexCube = floor(this->m_roughness[i] * this->m_cubeTexs.size());
-			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, this->m_cubeTexs[indexCube]);
-			glUniform1i(glGetUniformLocation(this->m_shader->Program, "texCube"), 3);
+				int indexCube = min(floor(roughness * this->m_cubeTexs.size()), this->m_cubeTexs.size() - 1.0f);
+				
+				glActiveTexture(GL_TEXTURE3);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, this->m_cubeTexs[indexCube]);
+				glUniform1i(glGetUniformLocation(this->m_shader->Program, "texCube"), 3);
 
-			this->m_renderObj->GetTransform()->SetTranslation((i % 4) * 3, floorf(i / 4) * 3, 0);
+				this->m_renderObj->GetTransform()->SetTranslation(i * 3, 0, -j * 3);
 
-			this->m_renderObj->Render(this->m_shader);
+				this->m_renderObj->Render(this->m_shader);
+			}
 		}
 	}
 
@@ -72,7 +78,7 @@ protected:
 
 		this->m_skybox = new Skybox(this->m_cubeTexs[0]);
 
-		this->m_shader = new Shader("shaders/Simple.vs", "shaders/pbr/UE4.fs");
+		this->m_shader = new Shader("shaders/Simple.vs", "shaders/pbr/IBL_2.fs");
 
 		this->m_camera->GetTransform()->SetTranslation(0, 0, 4);
 
