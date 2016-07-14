@@ -62,3 +62,12 @@ Cd是材质的漫反射颜色，Li是灯光颜色，N是法线，L是指向光�
 所以Blinn-Phong镜面反射的能量守恒函数是：
 
 ![energy_conservation_9](https://github.com/Tangoyzx/LearnOpenGL/blob/master/docs/imgs/EnergyConservation_7.png)
+
+（这里开始作者没有说明这个归一化系数的来历。下面大概说说另外一篇文章http://www.farbrausch.de/~fg/stuff/phong.pdf，给出的解释。）
+
+光照能量如下图不等式的左方
+![energy_conservation_10](https://github.com/Tangoyzx/LearnOpenGL/blob/master/docs/imgs/EnergyConservation_2.png)
+
+由于要的是归一化系数，也就是求出最大镜面反射比的时候的光照亮度值，所以可以认为N和L相同，也就是说R也等于N。那么NdotV也就等于RdotV，假设都称为cos(x)，对于Phong来说的光照应该就是integrate(RdotV^n * NdotV, x, 0, Ω)乘以光的颜色，相当于integrate(cos(x)^(n+1), x, 0, Ω)，积分得(2π / n + 2)，所以要除以它以归一化，所以Phong的归一化系数是((n + 2) / 2π)
+
+同理可计算Blinn-Phong的近似系数，由于N=L，所以NdotH就等于cos(x / 2)，所以光照应该是integrate(cos(x/2)^n * cos(x), 0, Ω)，计算出来的答案会很复杂，所以一般用的都是简化版本(n + 8)/8π
