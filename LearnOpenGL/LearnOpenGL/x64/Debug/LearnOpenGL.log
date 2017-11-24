@@ -1,0 +1,113 @@
+﻿  RenderObject.cpp
+  PostEffectHelper.cpp
+  Model.cpp
+  Mesh.cpp
+f:\gitproject\learnopengl\learnopengl\learnopengl\mesh.cpp(19): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+  Matrix.cpp
+  main.cpp
+f:\gitproject\learnopengl\learnopengl\learnopengl\example2.h(54): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampledeferred.h(144): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\examplepbr.h(40): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\examplepbr.h(42): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\examplepbr.h(42): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(43): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(44): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(49): warning C4244: “初始化”: 从“const float”转换到“int”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(55): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(65): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(71): warning C4244: “初始化”: 从“const float”转换到“int”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(77): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\exampleibl.h(112): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\examplessao.h(236): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\main.cpp(116): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\main.cpp(117): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\main.cpp(121): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\main.cpp(122): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\main.cpp(124): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+f:\gitproject\learnopengl\learnopengl\learnopengl\main.cpp(125): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+  ExampleBase.cpp
+  Camera.cpp
+f:\gitproject\learnopengl\learnopengl\learnopengl\camera.cpp(17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  正在生成代码...
+ExampleBase.obj : error LNK2001: 无法解析的外部符号 __imp___glewBindBuffer
+Mesh.obj : error LNK2001: 无法解析的外部符号 __imp___glewBindBuffer
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewBindBuffer
+ExampleBase.obj : error LNK2001: 无法解析的外部符号 __imp___glewBufferSubData
+main.obj : error LNK2019: 无法解析的外部符号 glewInit，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwInit，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwTerminate，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwWindowHint，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwCreateWindow，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwWindowShouldClose，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetWindowShouldClose，该符号在函数 "void __cdecl key_callback(struct GLFWwindow *,int,int,int,int)" (?key_callback@@YAXPEAUGLFWwindow@@HHHH@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwPollEvents，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetInputMode，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetKeyCallback，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetCursorPosCallback，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetScrollCallback，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwMakeContextCurrent，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSwapBuffers，该符号在函数 main 中被引用
+main.obj : error LNK2001: 无法解析的外部符号 __glewActiveTexture
+main.obj : error LNK2001: 无法解析的外部符号 __glewBindBuffer
+main.obj : error LNK2001: 无法解析的外部符号 __glewBufferData
+main.obj : error LNK2001: 无法解析的外部符号 __glewGenBuffers
+main.obj : error LNK2001: 无法解析的外部符号 __glewAttachShader
+main.obj : error LNK2001: 无法解析的外部符号 __glewCompileShader
+main.obj : error LNK2001: 无法解析的外部符号 __glewCreateProgram
+main.obj : error LNK2001: 无法解析的外部符号 __glewCreateShader
+main.obj : error LNK2001: 无法解析的外部符号 __glewDeleteShader
+main.obj : error LNK2001: 无法解析的外部符号 __glewGetProgramInfoLog
+main.obj : error LNK2001: 无法解析的外部符号 __glewGetProgramiv
+main.obj : error LNK2001: 无法解析的外部符号 __glewGetShaderInfoLog
+main.obj : error LNK2001: 无法解析的外部符号 __glewGetShaderiv
+main.obj : error LNK2001: 无法解析的外部符号 __glewGetUniformLocation
+main.obj : error LNK2001: 无法解析的外部符号 __glewLinkProgram
+main.obj : error LNK2001: 无法解析的外部符号 __glewShaderSource
+main.obj : error LNK2001: 无法解析的外部符号 __glewUniform1i
+main.obj : error LNK2001: 无法解析的外部符号 __glewUniformMatrix4fv
+main.obj : error LNK2001: 无法解析的外部符号 __glewUseProgram
+main.obj : error LNK2001: 无法解析的外部符号 __glewBindFramebuffer
+main.obj : error LNK2001: 无法解析的外部符号 __glewBindRenderbuffer
+main.obj : error LNK2001: 无法解析的外部符号 __glewFramebufferRenderbuffer
+main.obj : error LNK2001: 无法解析的外部符号 __glewFramebufferTexture2D
+main.obj : error LNK2001: 无法解析的外部符号 __glewGenFramebuffers
+main.obj : error LNK2001: 无法解析的外部符号 __glewGenRenderbuffers
+main.obj : error LNK2001: 无法解析的外部符号 __glewRenderbufferStorage
+main.obj : error LNK2001: 无法解析的外部符号 __glewBindBufferBase
+main.obj : error LNK2001: 无法解析的外部符号 __glewGetUniformBlockIndex
+main.obj : error LNK2001: 无法解析的外部符号 __glewUniformBlockBinding
+main.obj : error LNK2001: 无法解析的外部符号 glewExperimental
+Mesh.obj : error LNK2001: 无法解析的外部符号 __imp___glewBufferData
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewBufferData
+Mesh.obj : error LNK2001: 无法解析的外部符号 __imp___glewGenBuffers
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewGenBuffers
+Mesh.obj : error LNK2001: 无法解析的外部符号 __imp___glewEnableVertexAttribArray
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewEnableVertexAttribArray
+Mesh.obj : error LNK2001: 无法解析的外部符号 __imp___glewVertexAttribPointer
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewVertexAttribPointer
+Mesh.obj : error LNK2001: 无法解析的外部符号 __imp___glewBindVertexArray
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewBindVertexArray
+Mesh.obj : error LNK2001: 无法解析的外部符号 __imp___glewGenVertexArrays
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewGenVertexArrays
+Model.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl Assimp::Importer::Importer(void)" (??0Importer@Assimp@@QEAA@XZ)，该符号在函数 "public: __cdecl Model::Model(char const *)" (??0Model@@QEAA@PEBD@Z) 中被引用
+Model.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl Assimp::Importer::~Importer(void)" (??1Importer@Assimp@@QEAA@XZ)，该符号在函数 "public: __cdecl Model::Model(char const *)" (??0Model@@QEAA@PEBD@Z) 中被引用
+Model.obj : error LNK2019: 无法解析的外部符号 "public: struct aiScene const * __cdecl Assimp::Importer::ReadFile(char const *,unsigned int)" (?ReadFile@Importer@Assimp@@QEAAPEBUaiScene@@PEBDI@Z)，该符号在函数 "public: __cdecl Model::Model(char const *)" (??0Model@@QEAA@PEBD@Z) 中被引用
+Model.obj : error LNK2019: 无法解析的外部符号 "public: char const * __cdecl Assimp::Importer::GetErrorString(void)const " (?GetErrorString@Importer@Assimp@@QEBAPEBDXZ)，该符号在函数 "public: __cdecl Model::Model(char const *)" (??0Model@@QEAA@PEBD@Z) 中被引用
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewActiveTexture
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewUseProgram
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewBindFramebuffer
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewBindRenderbuffer
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewCheckFramebufferStatus
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewFramebufferRenderbuffer
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewFramebufferTexture2D
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewGenFramebuffers
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewGenRenderbuffers
+PostEffectHelper.obj : error LNK2001: 无法解析的外部符号 __imp___glewRenderbufferStorage
+RenderObject.obj : error LNK2001: 无法解析的外部符号 __imp___glewGetUniformLocation
+RenderObject.obj : error LNK2001: 无法解析的外部符号 __imp___glewUniformMatrix4fv
+F:\GitProject\LearnOpenGL\ref\libs\assimp.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+F:\GitProject\LearnOpenGL\ref\libs\FreeImage.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+F:\GitProject\LearnOpenGL\ref\libs\glew32s.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+F:\GitProject\LearnOpenGL\ref\libs\glfw3.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+F:\GitProject\LearnOpenGL\ref\libs\SOIL.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+F:\GitProject\LearnOpenGL\LearnOpenGL\x64\Debug\LearnOpenGL.exe : fatal error LNK1120: 68 个无法解析的外部命令

@@ -19,9 +19,7 @@
 #include "ExamplePBR.h"
 #include "ExampleMipmap.h"
 #include "ExampleIBL.h"
-#include "ExampleSSR.h"
 #include "ExampleSSAO.h"
-#include "ExampleVolumeLight.h"
 #include "ExampleShadow.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -80,8 +78,9 @@ int main()
 	GLuint uboId = GetCommonUniformBuffer();
 	glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboId);
 	
-	auto example = new ExampleShadow();
+	//auto example = new ExampleIBL();
 	//auto example = new ExampleDeferred();
+	auto example = new ExampleSSAO();
 	example->Init(camera, uboId);
 
 	while (!glfwWindowShouldClose(window))

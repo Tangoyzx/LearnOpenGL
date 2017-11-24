@@ -26,3 +26,17 @@
 Deferred的Depth保存1-深度，保证Clear的时候没有被绘制的点是最远端。
 
 增加一个SSAO的例子，为了更明显使用的时候改成了ao的平方。
+
+## 图片
+
+### PBR
+
+![](https://github.com/Tangoyzx/LearnOpenGL/tree/master/samples/pbr.png)
+
+### Deferred Rendering
+
+![](https://github.com/Tangoyzx/LearnOpenGL/tree/master/samples/deferred_rendering.png)
+
+### SSAO
+
+![](https://github.com/Tangoyzx/LearnOpenGL/tree/master/samples/ssao.png)
