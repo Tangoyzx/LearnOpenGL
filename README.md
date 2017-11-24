@@ -31,12 +31,12 @@ Deferred的Depth保存1-深度，保证Clear的时候没有被绘制的点是最
 
 ### PBR
 
-![](https://github.com/Tangoyzx/LearnOpenGL/tree/master/samples/pbr.png)
+![](https://github.com/Tangoyzx/LearnOpenGL/blob/master/samples/pbr.png)
 
 ### Deferred Rendering
 
-![](https://github.com/Tangoyzx/LearnOpenGL/tree/master/samples/deferred_rendering.png)
+![](https://github.com/Tangoyzx/LearnOpenGL/blob/master/samples/deferred_rendering.png)
 
 ### SSAO
 
-![](https://github.com/Tangoyzx/LearnOpenGL/tree/master/samples/ssao.png)
+![](https://github.com/Tangoyzx/LearnOpenGL/blob/master/samples/ssao.png)
